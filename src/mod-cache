@@ -1,0 +1,2 @@
+#!/bin/bash
+cat $fac/mods/mod-list.json | grep name | cut -d\" -f4 | sed "/base/d" | create_modlist >$cache/modlist

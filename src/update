@@ -1,0 +1,35 @@
+#!/bin/bash
+cookie=$(mktemp)
+
+read -p "Username or email: " login
+if [[ -z "${login}" ]]
+then
+	break
+fi
+read -sp "Password: " password
+echo
+if [[ -z "${password}" ]]; then
+	break
+fi
+
+echo "Logging in..."
+csrf_token=$(curl --silent --cookie-jar "$cookie" \
+	https://www.factorio.com/login \
+	| grep -Po '(?<=name="csrf_token" type="hidden" value=")[^"]+')
+
+if [[ -z "$csrf_token" ]]; then
+	error "Could not find the CSRF token. This script might be broken."
+	exit 1
+fi
+output=$(curl --silent --dump-header - --cookie-jar "$cookie" --cookie "$cookie" \
+	https://www.factorio.com/login --data-urlencode username_or_email="$login" \
+	--data-urlencode password="$password" --data-urlencode csrf_token="$csrf_token" )
+if ! echo "$output" | grep -q '^Location: '
+then
+	error "Login failed"
+	exit 1
+fi
+
+modlist=$(mktemp)
+download <$cache/modlist | download.sh
+export cookie=$cookie
