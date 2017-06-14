@@ -10,7 +10,7 @@ do
 	echo $url
 	if [ $type == 'git' ]
 	then
-		if [ ${oldname}x == x ]
+		if [ "${oldname}x" == "x" ]
 		then
 			git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name"
 		else
@@ -24,7 +24,7 @@ do
 	elif [ $type == 'file' ]
 	then
 		name=`echo $url | cut -d/ -f 9`;
-		if [ ${oldname}x != x ]
+		if [ "${oldname}x" != "x" ]
 		then
 			if [ "$oldname" == "$name" ]
 			then
