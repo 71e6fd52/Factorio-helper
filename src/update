@@ -1,5 +1,5 @@
 #!/bin/bash
-cookie=$(mktemp)
+export cookie=$(mktemp)
 
 read -p "Username or email: " login
 if [[ -z "${login}" ]]
@@ -13,23 +13,21 @@ if [[ -z "${password}" ]]; then
 fi
 
 echo "Logging in..."
-csrf_token=$(curl --silent --cookie-jar "$cookie" \
-	https://www.factorio.com/login \
-	| grep -Po '(?<=name="csrf_token" type="hidden" value=")[^"]+')
+post=$(mktemp)
+url=$(curl --silent --location --cookie-jar "$cookie" https://mods.factorio.com/login --dump-header - \
+	| tee $post | sed -n 's/^Location: \(.*\)$/\1/p' | tail -n1)
+redirect=$(sed -n 's/^\s*<input type="hidden" name="redirect" value="\(.*\)">\s*$/\1/p' $post)
+service=$(sed -n 's/^\s*<input type="hidden" name="service" value="\(.*\)">\s*$/\1/p' $post)
+csrf=$(sed -n 's/^\s*<input type="hidden" name="csrf-token" value="\(.*\)">\s*$/\1/p' $post)
 
-if [[ -z "$csrf_token" ]]; then
-	error "Could not find the CSRF token. This script might be broken."
-	exit 1
-fi
-output=$(curl --silent --dump-header - --cookie-jar "$cookie" --cookie "$cookie" \
-	https://www.factorio.com/login --data-urlencode username_or_email="$login" \
-	--data-urlencode password="$password" --data-urlencode csrf_token="$csrf_token" )
+output=$(curl --silent --location --dump-header - --cookie-jar "$cookie" --cookie "$cookie" \
+	https://auth.factorio.com/login/process --data-urlencode csrf-token="$csrf" \
+	--data-urlencode username="$login" --data-urlencode password="$password" \
+	--data-urlencode redirect="$redirect" --data-urlencode service="$service")
 if ! echo "$output" | grep -q '^Location: '
 then
-	error "Login failed"
+	echo "Login failed"
 	exit 1
 fi
 
-modlist=$(mktemp)
 download <$cache/modlist | download.sh
-export cookie=$cookie
