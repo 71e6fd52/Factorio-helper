@@ -23,14 +23,8 @@ target("create_modlist")
 	add_files("src/create_modlist.cpp") 
 	add_links("factorio-mod-info", "boost_system", "yaml-cpp")
 	before_build(function (target)
-		if not (os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp")) then
-			if io.stderr == nil then
-				io.stderr = io.open("/dev/stderr", "a")
-			end
-			io.stderr:print("Need Factorio-Mod-info");
-			io.stderr:print("visit https://github.com/745275633/Factorio-Mod-info")
-			os.exit(1);
-		end
+		assert(os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp"),
+			"Need Factorio-Mod-info\nVisit https://github.com/745275633/Factorio-Mod-info")
 	end)
 
 target("download")
@@ -38,13 +32,7 @@ target("download")
 	add_files("src/download.cpp") 
 	add_links("factorio-mod-info", "boost_system", "yaml-cpp")
 	before_build(function (target)
-		if not (os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp")) then
-			if io.stderr == nil then
-				io.stderr = io.open("/dev/stderr", "a")
-			end
-			io.stderr:print("Need Factorio-Mod-info");
-			io.stderr:print("visit https://github.com/745275633/Factorio-Mod-info")
-			os.exit(1);
-		end
+		assert(os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp"),
+			"Need Factorio-Mod-info\nVisit https://github.com/745275633/Factorio-Mod-info")
 	end)
 
