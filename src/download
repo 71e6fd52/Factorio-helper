@@ -7,11 +7,11 @@ do
 	oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
 	echo $basename
 	echo $url
-	if [ $type == 'git' ]
+	if [[ $type == 'git' ]]
 	then
-		if [ "${oldname}x" == "x" ]
+		if [[ "${oldname}x" == "x" ]]
 		then
-			if [ -d "${oldname}/.git" ]
+			if [[ -d "${oldname}/.git" ]]
 			then
 				rm -rf "${oldname}"
 			fi
@@ -23,17 +23,17 @@ do
 			git pull origin
 		fi
 		name="${name}_$(sed -n 's/^\s*"version": *"\(.*\)",/\1/p' info.json)"
-		if [ "$oldname" != "$name" ]
+		if [[ "$oldname" != "$name" ]]
 		then
 			mv "$fac/mods/$oldname" \
 				"$fac/mods/$name" -T
 		fi
-	elif [ $type == 'file' ]
+	elif [[ $type == 'file' ]]
 	then
 		name=`echo $url | cut -d/ -f 9`;
-		if [ "${oldname}x" != "x" ]
+		if [[ "${oldname}x" != "x" ]]
 		then
-			if [ "$oldname" == "$name" ]
+			if [[ "$oldname" == "$name" ]]
 			then
 				continue
 			else
