@@ -1,8 +1,14 @@
 #!/bin/bash
 cp -r $fac/config/ $conf
 cp $fac/mods/mod-settings.json $conf
-cp $fac/mods/mod-list.json $conf
 cd $conf
+read "message?Type message?[Y/n]"
+if [[ "$message" =~ ^(([Yy]|[Yy]es)|)$ ]]
+then
+	read "message?Message: "
+else
+	message=`date --iso-8601`
+fi
 git add .
-git commit -m `date --iso-8601`
+git commit -m "$message"
 git push origin

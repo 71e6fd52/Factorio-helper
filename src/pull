@@ -3,4 +3,4 @@ cd $conf
 git pull origin
 cp -r $conf/config/ $fac
 cp $conf/mod-settings.json $fac/mods/
-cp $conf/mod-list.json $fac/mods/mod-list.json
+create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json

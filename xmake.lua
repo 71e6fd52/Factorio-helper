@@ -21,21 +21,20 @@ end
 target("create_modlist")
 	set_kind("binary")
 	add_files("src/create_modlist.cpp") 
-	add_links("factorio-mod-info", "boost_system", "yaml-cpp")
+	add_links("yaml-cpp")
 	before_build(function (target)
-		if not (os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp")) then
+		if not (os.exists("/usr/lib/libyaml-cpp.so") or os.exists("/usr/local/lib/libyaml-cpp.so")) then
 			if io.stderr == nil then
 				io.stderr = io.open("/dev/stderr", "a")
 			end
-			io.stderr:print("Need Factorio-Mod-info");
-			io.stderr:print("visit https://github.com/745275633/Factorio-Mod-info")
+			io.stderr:print("Need yaml-cpp");
 			os.exit(1);
 		end
 	end)
 
-target("download")
+target("download-info")
 	set_kind("binary")
-	add_files("src/download.cpp") 
+	add_files("src/download-info.cpp") 
 	add_links("factorio-mod-info", "boost_system", "yaml-cpp")
 	before_build(function (target)
 		if not (os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/include/factorio/mod-info.hpp")) then
