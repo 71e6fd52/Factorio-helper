@@ -1,25 +1,26 @@
-#!/bin/bash
+#!/bin/bash -x
 mkdir $fac/mods -p
 while read type
 do
 	read url
 	read name
-	basename=`echo $name | cut -d_ -f 1`
-	oldname=`ls $fac/mods/ -1 | grep -E "^${basename}_"`
+	oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
 	echo $basename
 	echo $url
 	if [ $type == 'git' ]
 	then
 		if [ "${oldname}x" == "x" ]
 		then
+			if [ -d "${oldname}/.git" ]
+			then
+				rm -rf "${oldname}"
+			fi
 			git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name"
 		else
-			if [ "$oldname" != "$name" ]
-			then
-				mv "$fac/mods/$oldname" "$fac/mods/$name"
-				cd "$fac/mods/$name"
-				git pull origin
-			fi
+			cd "$fac/mods/$oldname"
+			git pull origin
+			mv "$fac/mods/$oldname" \
+				"$fac/mods/${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
 		fi
 	elif [ $type == 'file' ]
 	then
@@ -30,7 +31,7 @@ do
 			then
 				continue
 			else
-				rm "$fac/mods/${basename}_*"
+				rm -rf $fac/mods/$oldname
 			fi
 		fi
 		curl --location --cookie "${cookie}" \

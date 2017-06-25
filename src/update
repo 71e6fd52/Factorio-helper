@@ -30,4 +30,7 @@ then
 	exit 1
 fi
 
-download <$cache/modlist | download.sh
+download-info <$conf/modlist.yml | download
+create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
+
+rm $cookie

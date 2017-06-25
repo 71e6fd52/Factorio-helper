@@ -13,13 +13,12 @@ if [ $# != 1 ] ; then
 		git push --set-upstream origin master
 		cp -r $fac/config/ $conf
 		cp $fac/mods/mod-settings.json $conf
-		cp $fac/mods/mod-list.json $conf
+		sed -n 's/^\s*"name": "\(.*\)",$/\1: true/p' $fac/mods/mod-list.json >$conf/modlist
 		push
-		cache
+		create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
 	else
 		read "url?Input git URL"
 		git clone $url $conf
 		pull
-		cache
 	fi
 fi

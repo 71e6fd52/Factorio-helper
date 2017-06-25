@@ -8,7 +8,7 @@ bin=$share/bin
 xmake install --installdir=$share
 install -Dm755 src/factorio-helper $output/bin
 install -m755 src/add $bin
-install -m755 src/download.sh $bin
+install -m755 src/download $bin
 install -m755 src/init $bin
 install -m755 src/mod-cache $bin
 install -m755 src/pull $bin
