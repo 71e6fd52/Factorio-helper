@@ -16,12 +16,13 @@ do
 				rm -rf "${oldname}"
 			fi
 			git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name"
+			cd "$fac/mods/$name"
 		else
 			cd "$fac/mods/$oldname"
 			git pull origin
-			mv "$fac/mods/$oldname" \
-				"$fac/mods/${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
 		fi
+		mv "$fac/mods/$oldname" \
+			"$fac/mods/${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
 	elif [ $type == 'file' ]
 	then
 		name=`echo $url | cut -d/ -f 9`;
