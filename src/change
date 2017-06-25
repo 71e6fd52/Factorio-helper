@@ -1,0 +1,9 @@
+#!/bin/zsh
+read "name?Mod name:"
+read "enable?Did you want to enable?[Y/n]"
+if [[ "$enable" =~ (([Yy](es)?)|[Ee](nable)?|) ]]
+then
+	echo "$name" | f_enable 3<$conf/modlist.yml 
+else
+	echo "$name" | f_disable 3<$conf/modlist.yml 
+fi
