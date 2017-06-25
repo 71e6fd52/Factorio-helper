@@ -46,4 +46,3 @@ target("download-info")
 			os.exit(1);
 		end
 	end)
-

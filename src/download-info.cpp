@@ -1,6 +1,5 @@
 #include <yaml-cpp/yaml.h>
 #include <factorio/mod-info.hpp>
-#include <map>
 
 int main()
 {
