@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -e
 read "new?Init a new config repository?[Y/n]"
 if [[ "$new" =~ ^(([Yy](es)?)|)$ ]]
 then

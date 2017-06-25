@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -e
 [[ "${fac}x" == "x" ]] && export fac="$HOME/.factorio"
 [[ "${conf}x" == "x" ]] && export conf="$fac/helper-config"
 [[ "${cache}x" == "x" ]] && export cache="$fac/cache"
