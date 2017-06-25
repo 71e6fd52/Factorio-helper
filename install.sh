@@ -12,7 +12,6 @@ install -m755 src/factorio-helper $output/bin
 install -m755 src/change $bin
 install -m755 src/download $bin
 install -m755 src/init $bin
-install -m755 src/mod-cache $bin
 install -m755 src/pull $bin
 install -m755 src/push $bin
 install -m755 src/update $bin
