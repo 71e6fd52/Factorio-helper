@@ -2,7 +2,7 @@
 [ ${fac}x == x ] && export fac="$HOME/.factorio"
 [ ${conf}x == x ] && export conf="$fac/helper-config"
 [ ${cache}x == x ] && export cache="$fac/cache"
-export PATH="/usr/share/factorio-helper/bin:$PATH"
+export PATH="$(dirname $0)/../share/$(basename $0)/bin:$PATH"
 mkdir $fac -p
 mkdir $conf -p
 mkdir $cache -p
