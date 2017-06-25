@@ -5,7 +5,7 @@ then
 fi
 share=$output/share/factorio-helper
 bin=$share/bin
-xmake install --installdir=$share
+xmake install --installdir=$share --root
 install -Dm755 src/factorio-helper $output/bin
 install -m755 src/change $bin
 install -m755 src/download $bin
