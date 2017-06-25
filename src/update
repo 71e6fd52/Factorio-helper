@@ -7,10 +7,10 @@ then
 	echo "Please input your's username"
 	exit 1
 fi
-read -s "passwd?Password: " password
+read -s "password?Password: "
 echo
 if [[ -z "${password}" ]]; then
-	echo "Please input your's possword"
+	echo "Please input your's password"
 	exit 1
 fi
 
