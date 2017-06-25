@@ -4,12 +4,14 @@ export cookie=$(mktemp)
 read "login?Username or email: "
 if [[ -z "${login}" ]]
 then
-	break
+	echo "Please input your's username"
+	exit 1
 fi
 read -s "passwd?Password: " password
 echo
 if [[ -z "${password}" ]]; then
-	break
+	echo "Please input your's possword"
+	exit 1
 fi
 
 echo "Logging in..."
@@ -19,6 +21,7 @@ url=$(curl --silent --location --cookie-jar "$cookie" https://mods.factorio.com/
 redirect=$(sed -n 's/^\s*<input type="hidden" name="redirect" value="\(.*\)">\s*$/\1/p' $post)
 service=$(sed -n 's/^\s*<input type="hidden" name="service" value="\(.*\)">\s*$/\1/p' $post)
 csrf=$(sed -n 's/^\s*<input type="hidden" name="csrf-token" value="\(.*\)">\s*$/\1/p' $post)
+rm $post
 
 output=$(curl --silent --location --dump-header - --cookie-jar "$cookie" --cookie "$cookie" \
 	https://auth.factorio.com/login/process --data-urlencode csrf-token="$csrf" \
