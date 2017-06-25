@@ -46,31 +46,3 @@ target("download-info")
 			os.exit(1);
 		end
 	end)
-
-target("f_enable")
-	set_kind("binary")
-	add_files("src/enable.cpp") 
-	add_links("yaml-cpp")
-	before_build(function (target)
-		if not (os.exists("/usr/lib/libyaml-cpp.so") or os.exists("/usr/local/lib/libyaml-cpp.so")) then
-			if io.stderr == nil then
-				io.stderr = io.open("/dev/stderr", "a")
-			end
-			io.stderr:print("Need yaml-cpp");
-			os.exit(1);
-		end
-	end)
-
-target("f_disable")
-	set_kind("binary")
-	add_files("src/disable.cpp") 
-	add_links("yaml-cpp")
-	before_build(function (target)
-		if not (os.exists("/usr/lib/libyaml-cpp.so") or os.exists("/usr/local/lib/libyaml-cpp.so")) then
-			if io.stderr == nil then
-				io.stderr = io.open("/dev/stderr", "a")
-			end
-			io.stderr:print("Need yaml-cpp");
-			os.exit(1);
-		end
-	end)
