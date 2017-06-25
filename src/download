@@ -22,7 +22,7 @@ do
 			cd "$fac/mods/$oldname"
 			git pull origin
 		fi
-		name="${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
+		name="${name}_$(sed -n 's/^\s*"version": *"\(.*\)",/\1/p' info.json)"
 		if [ "$oldname" != "$name" ]
 		then
 			mv "$fac/mods/$oldname" \
