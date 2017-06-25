@@ -17,12 +17,17 @@ do
 			fi
 			git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name"
 			cd "$fac/mods/$name"
+			oldname="$name"
 		else
 			cd "$fac/mods/$oldname"
 			git pull origin
 		fi
-		mv "$fac/mods/$oldname" \
-			"$fac/mods/${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
+		name="${name}_$(sed -n 's/^\s*"version": "\(.*\)",/\1/p' info.json)"
+		if [ "$oldname" != "$name" ]
+		then
+			mv "$fac/mods/$oldname" \
+				"$fac/mods/$name" -T
+		fi
 	elif [ $type == 'file' ]
 	then
 		name=`echo $url | cut -d/ -f 9`;
