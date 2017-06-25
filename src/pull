@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 cd $conf
 git pull origin
 cp -r $conf/config/ $fac

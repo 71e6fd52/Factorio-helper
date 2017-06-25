@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/bin/zsh
 export cookie=$(mktemp)
 
-read -p "Username or email: " login
+read "login?Username or email: "
 if [[ -z "${login}" ]]
 then
 	break
 fi
-read -sp "Password: " password
+read -s "passwd?Password: " password
 echo
 if [[ -z "${password}" ]]; then
 	break

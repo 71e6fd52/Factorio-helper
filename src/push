@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 cp -r $fac/config/ $conf
 cp $fac/mods/mod-settings.json $conf
 cd $conf
