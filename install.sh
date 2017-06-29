@@ -10,6 +10,7 @@ install -d $output/bin
 install -d $bin
 install -m755 src/factorio-helper $output/bin
 install -m755 src/change $bin
+ln -s $bin/change $bin/add
 install -m755 src/download $bin
 install -m755 src/init $bin
 install -m755 src/pull $bin
