@@ -6,3 +6,4 @@ do
 	sort $tmp >$conf/modlist.yml
 done
 rm -f $tmp
+create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
