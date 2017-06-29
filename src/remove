@@ -1,0 +1,8 @@
+#!/bin/zsh
+tmp=$(mktemp)
+while read "name?Mod name:"
+do
+	sed "/^$name: /d" $conf/modlist.yml >$tmp
+	sort $tmp >$conf/modlist.yml
+done
+rm -f $tmp
