@@ -33,7 +33,7 @@ then
 	exit 1
 fi
 
-download-info <$conf/modlist.yml | download
+download-info <$conf/modlist.yml 3<$conf/nongit | download
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
 
 rm $cookie

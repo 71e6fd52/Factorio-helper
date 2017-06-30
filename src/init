@@ -13,6 +13,7 @@ then
 	cp -r $fac/config/ $conf
 	cp $fac/mods/mod-settings.json $conf
 	sed -n 's/^\s*"name": "\(.*\)",$/\1: true/p' $fac/mods/mod-list.json | sort >$conf/modlist.yml
+	touch $conf/nongit
 	push
 	create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
 else
