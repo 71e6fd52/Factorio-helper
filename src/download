@@ -1,4 +1,4 @@
-#!/bin/zsh -x
+#!/bin/zsh
 mkdir $fac/mods -p
 while read type
 do
