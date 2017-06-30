@@ -1,0 +1,13 @@
+#compdef factorio-helper
+
+local -a options
+options=(
+'add: Add mod into modlist'
+'change: Enable/disable a mod '
+'list: Display mod list'
+'update: Update all mod'
+'pull: Pull helper config form remote'
+'push: Push helper config to remote'
+'init: Init new helper config repo'
+)
+_describe 'values' options
