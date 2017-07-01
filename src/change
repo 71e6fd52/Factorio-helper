@@ -1,7 +1,14 @@
 #!/bin/zsh
 tmp=$(mktemp)
-while read "name?Mod name:"
+while read "name?Mod name: "
 do
+	if ! (grep -E "^$name: " $conf/modlist.yml || echo "$name" | mod_exist 2>/dev/null)
+	then
+		echo "Can't find this mod"
+		echo "Did you mean"
+		echo "$name" | search 2>/dev/null
+		continue
+	fi
 	read "enable?Did you want to enable?[Y/n]"
 	if [[ "$enable" =~ (([Yy](es)?)|[Ee](nable)?|(^$)) ]]
 	then
