@@ -2,7 +2,7 @@
 tmp=$(mktemp)
 while read "name?Mod name:"
 do
-	if ! echo "$name" | mod_exist
+	if ! (grep "$name" $conf/modlist.yml || echo "$name" | mod_exist 2>/dev/null)
 	then
 		echo "Can't find this mod"
 		continue
