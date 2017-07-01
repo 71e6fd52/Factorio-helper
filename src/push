@@ -1,5 +1,5 @@
 #!/bin/zsh -e
-cp -r $fac/config/ $conf
+cp -rfub $fac/config/ $conf
 cp $fac/mods/mod-settings.json $conf
 cd $conf
 read "message?Type message?[Y/n]"
