@@ -5,6 +5,8 @@ do
 	if ! (grep -E "^$name: " $conf/modlist.yml || echo "$name" | mod_exist 2>/dev/null)
 	then
 		echo "Can't find this mod"
+		echo "Did you mean"
+		echo "$name" | search
 		continue
 	fi
 	read "enable?Did you want to enable?[Y/n]"

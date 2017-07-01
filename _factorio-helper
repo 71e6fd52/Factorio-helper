@@ -5,6 +5,7 @@ options=(
 'add: Add mod into modlist'
 'change: Enable/disable a mod '
 'list: Display mod list'
+'search: Search a mod'
 'update: Update all mod'
 'pull: Pull helper config form remote'
 'push: Push helper config to remote'
