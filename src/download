@@ -5,7 +5,7 @@ do
 	read url
 	read name
 	oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
-	echo $basename
+	echo $name
 	echo $url
 	if [[ $type == 'git' ]]
 	then
