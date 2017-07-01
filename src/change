@@ -2,6 +2,11 @@
 tmp=$(mktemp)
 while read "name?Mod name:"
 do
+	if ! echo "$name" | mod_exist
+	then
+		echo "Can't find this mod"
+		continue
+	fi
 	read "enable?Did you want to enable?[Y/n]"
 	if [[ "$enable" =~ (([Yy](es)?)|[Ee](nable)?|(^$)) ]]
 	then
