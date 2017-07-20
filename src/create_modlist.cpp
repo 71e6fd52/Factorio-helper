@@ -3,24 +3,23 @@
 
 int main()
 {
-	using namespace std;
-	YAML::Node node = YAML::Load(std::cin);
-	cout << R"({
+  using std::cout;
+  YAML::Node node = YAML::Load(std::cin);
+  cout << R"({
   "mods": [
     {
       "name": "base",
       "enabled": true
     },
 )";
-	for (const auto & i : node)
-	{
-		cout << R"(    {
+    for (const auto & i : node) {
+      cout << R"(    {
       "name": ")" << i.first << R"(",)" << R"(
       "enabled": )" << i.second << R"(
     },
 )";
-	}
-	cout << R"(  ]
+    }
+  cout << R"(  ]
 }
 )";
 }

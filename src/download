@@ -2,57 +2,57 @@
 mkdir $fac/mods -p
 while read type
 do
-	read url
-	read name
-	oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
-	echo $name
-	echo $url
-	if [[ $type == 'git' ]]
-	then
-		if [[ "${oldname}x" == "x" ]]
-		then
-			if [[ -d "${oldname}/.git" ]]
-			then
-				rm -rf "$fac/mods/$oldname"
-			fi
-			git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name" || exit $?
-			cd "$fac/mods/$name"
-			oldname="$name"
-		else
-			cd "$fac/mods/$oldname"
-			git pull origin
-		fi
-		version="$(sed -rn 's/^\s*"version":\s*"(.*)"\s*,\s*$/\1/p' info.json)"
-		if [[ ! $version =~ ^([0-9]+.)*[0-9]+$ ]]
-		then
-			echo "$name" >>$conf/nongit
-			rerun=1
-			rm -rf "$fac/mods/$oldname"
-			continue
-		fi
-		name="${name}_${version}"
-		if [[ "$oldname" != "$name" ]]
-		then
-			mv "$fac/mods/$oldname" \
-				"$fac/mods/$name" -T
-		fi
-	elif [[ $type == 'file' ]]
-	then
-		name=`echo $url | cut -d/ -f 9`;
-		if [[ "${oldname}x" != "x" ]]
-		then
-			if [[ "$oldname" == "$name" ]]
-			then
-				continue
-			else
-				rm -rf $fac/mods/$oldname
-			fi
-		fi
-		curl --location --cookie "${cookie}" \
-         --continue-at - "$url" -o "$fac/mods/$name"
-	fi
+  read url
+  read name
+  oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
+  echo $name
+  echo $url
+  if [[ $type == 'git' ]]
+  then
+    if [[ "${oldname}x" == "x" ]]
+    then
+      if [[ -d "${oldname}/.git" ]]
+      then
+        rm -rf "$fac/mods/$oldname"
+      fi
+      git clone --depth 1 "https://github.com/$url.git" "$fac/mods/$name" || exit $?
+      cd "$fac/mods/$name"
+      oldname="$name"
+    else
+      cd "$fac/mods/$oldname"
+      git pull origin
+    fi
+    version="$(sed -rn 's/^\s*"version":\s*"(.*)"\s*,\s*$/\1/p' info.json)"
+    if [[ ! $version =~ ^([0-9]+.)*[0-9]+$ ]]
+    then
+      echo "$name" >>$conf/nongit
+      rerun=1
+      rm -rf "$fac/mods/$oldname"
+      continue
+    fi
+    name="${name}_${version}"
+    if [[ "$oldname" != "$name" ]]
+    then
+      mv "$fac/mods/$oldname" \
+        "$fac/mods/$name" -T
+    fi
+  elif [[ $type == 'file' ]]
+  then
+    name=`echo $url | cut -d/ -f 9`;
+    if [[ "${oldname}x" != "x" ]]
+    then
+      if [[ "$oldname" == "$name" ]]
+      then
+        continue
+      else
+        rm -rf $fac/mods/$oldname
+      fi
+    fi
+    curl --location --cookie "${cookie}" \
+      --continue-at - "$url" -o "$fac/mods/$name"
+  fi
 done
 if [[ $rerun == 1 ]]
 then
-	>&2 echo -e '\033[31mPlaese re-run\033[0m'
+  >&2 echo -e '\033[31mPlaese re-run\033[0m'
 fi

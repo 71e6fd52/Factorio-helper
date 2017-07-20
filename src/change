@@ -2,24 +2,24 @@
 tmp=$(mktemp)
 while read "name?Mod name: "
 do
-	if ! (grep -E "^$name: " $conf/modlist.yml || echo "$name" | mod_exist 2>/dev/null)
-	then
-		echo "Can't find this mod"
-		echo "Did you mean"
-		echo "$name" | search 2>/dev/null
-		continue
-	fi
-	read "enable?Did you want to enable?[Y/n]"
-	if [[ "$enable" =~ (([Yy](es)?)|[Ee](nable)?|(^$)) ]]
-	then
-		sed "/^$name: /d" $conf/modlist.yml >$tmp
-		echo "$name: true" >>$tmp
-		sort $tmp >$conf/modlist.yml
-	else
-		sed "/^$name: /d" $conf/modlist.yml >$tmp
-		echo "$name: false" >>$tmp
-		sort $tmp >$conf/modlist.yml
-	fi
+  if ! (grep -E "^$name: " $conf/modlist.yml || echo "$name" | mod_exist 2>/dev/null)
+  then
+    echo "Can't find this mod"
+    echo "Did you mean"
+    echo "$name" | search 2>/dev/null
+    continue
+  fi
+  read "enable?Did you want to enable?[Y/n]"
+  if [[ "$enable" =~ (([Yy](es)?)|[Ee](nable)?|(^$)) ]]
+  then
+    sed "/^$name: /d" $conf/modlist.yml >$tmp
+    echo "$name: true" >>$tmp
+    sort $tmp >$conf/modlist.yml
+  else
+    sed "/^$name: /d" $conf/modlist.yml >$tmp
+    echo "$name: false" >>$tmp
+    sort $tmp >$conf/modlist.yml
+  fi
 done
 rm -f $tmp
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
