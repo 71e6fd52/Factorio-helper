@@ -2,11 +2,11 @@
 mkdir $fac/mods -p
 while read type
 do
-  read url
   read name
-  oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
   echo $name
+  read url
   echo $url
+  oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
   if [[ $type == 'git' ]]
   then
     if [[ "${oldname}x" == "x" ]]

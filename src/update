@@ -1,39 +1,5 @@
 #!/bin/zsh -e
-export cookie=$(mktemp)
 
-read "login?Username or email: "
-if [[ -z "${login}" ]]
-then
-  echo "Please input your's username"
-  exit 1
-fi
-read -s "password?Password: "
-echo
-if [[ -z "${password}" ]]; then
-  echo "Please input your's password"
-  exit 1
-fi
-
-echo "Logging in..."
-post=$(mktemp)
-url=$(curl --silent --location --cookie-jar "$cookie" https://mods.factorio.com/login --dump-header - \
-  | tee $post | sed -n 's/^Location: \(.*\)$/\1/p' | tail -n1)
-redirect=$(sed -n 's/^\s*<input type="hidden" name="redirect" value="\(.*\)">\s*$/\1/p' $post)
-service=$(sed -n 's/^\s*<input type="hidden" name="service" value="\(.*\)">\s*$/\1/p' $post)
-csrf=$(sed -n 's/^\s*<input type="hidden" name="csrf-token" value="\(.*\)">\s*$/\1/p' $post)
-rm $post
-
-output=$(curl --silent --location --dump-header - --cookie-jar "$cookie" --cookie "$cookie" \
-  https://auth.factorio.com/login/process --data-urlencode csrf-token="$csrf" \
-  --data-urlencode username="$login" --data-urlencode password="$password" \
-  --data-urlencode redirect="$redirect" --data-urlencode service="$service")
-if ! echo "$output" | grep -q '^Location: '
-then
-  echo "Login failed"
-  exit 1
-fi
-
+passwd
 download-info <$conf/modlist.yml 3<$conf/nongit | download
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
-
-rm $cookie
