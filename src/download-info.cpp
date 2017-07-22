@@ -1,11 +1,13 @@
 #include <factorio/mod-info.hpp>
 
+#include <DA/exception.hpp>
 #include <fstream>
 #include <iterator>
 #include <unordered_set>
 #include <yaml-cpp/yaml.h>
 
 int main()
+try
 {
   std::ifstream in3("/proc/self/fd/3");
   std::unordered_set<std::string> nongit{std::istream_iterator<std::string>(in3), std::istream_iterator<std::string>()};
@@ -21,3 +23,4 @@ int main()
     }
   }
 }
+DA_MAIN_CATCH
