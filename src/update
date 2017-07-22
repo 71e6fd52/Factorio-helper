@@ -1,4 +1,5 @@
 #!/bin/zsh -e
 
+passwd
 download-info <$conf/modlist.yml 3<$conf/nongit | download
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json

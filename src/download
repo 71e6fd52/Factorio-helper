@@ -1,6 +1,5 @@
 #!/bin/zsh
 mkdir $fac/mods -p
-passwd
 while read type
 do
   read url
