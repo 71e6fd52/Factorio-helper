@@ -13,6 +13,7 @@ try
   std::unordered_set<std::string> nongit{std::istream_iterator<std::string>(in3), std::istream_iterator<std::string>()};
   YAML::Node node = YAML::Load(std::cin);
   for (const auto & i : node) {
+    if(!i.second.as<bool>()) continue;
     factorio::mod::info mod;
     mod.read_name_fast(i.first.as<std::string>());
     if ((nongit.erase(mod.name()) != 0u) || mod.github_path() == "") {
