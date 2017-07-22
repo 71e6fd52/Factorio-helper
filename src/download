@@ -48,6 +48,11 @@ do
         rm -rf $fac/mods/$oldname
       fi
     fi
+    if [[ ! "$logi" ]]
+    then
+      passwd
+      logi=1
+    fi
     curl --location --cookie "${cookie}" \
       --continue-at - "$url" -o "$fac/mods/$name"
   fi
