@@ -1,7 +1,7 @@
 #!/bin/zsh -e
-[[ "${fac}" ]] && export fac="$HOME/.factorio"
-[[ "${conf}" ]] && export conf="$fac/helper-config"
-[[ "${cache}" ]] && export cache="$fac/cache"
+[[ "${fac}" ]] || export fac="$HOME/.factorio"
+[[ "${conf}" ]] || export conf="$fac/helper-config"
+[[ "${cache}" ]] || export cache="$fac/cache"
 export PATH="$(dirname $0)/../share/$(basename $0)/bin:$PATH"
 mkdir $fac -p
 mkdir $conf -p
