@@ -2,7 +2,7 @@
 [[ "${fac}" ]] || export fac="$HOME/.factorio"
 [[ "${conf}" ]] || export conf="$fac/helper-config"
 [[ "${cache}" ]] || export cache="$HOME/.cache/factorio-helper"
-export PATH="$(dirname $0)/../share/$(basename $0)/bin:$PATH"
+export PATH="$(dirname $0)/../lib/$(basename $0)/bin:$PATH"
 mkdir $fac -p
 mkdir $conf -p
 mkdir $cache -p

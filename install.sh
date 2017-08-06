@@ -3,9 +3,9 @@ if [ ${output}x == x ]
 then
 	output=/usr/local
 fi
-share=$output/share/factorio-helper
-bin=$share/bin
-xmake install --installdir=$share --root
+lib=$output/lib/factorio-helper
+bin=$lib/bin
+xmake install --installdir=$lib --root
 install -d $output/bin
 install -d $bin
 install -d $output/share/zsh/site-functions
