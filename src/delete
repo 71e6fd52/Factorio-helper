@@ -1,0 +1,6 @@
+#!/bin/zsh
+while read "name?Mod name: "
+do
+  sed -i "/^$name: /d" $conf/modlist.yml
+done
+create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
