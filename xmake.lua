@@ -18,6 +18,12 @@ if is_mode("release") then
   add_undefines("DEBUG")
 end
 
+before_build(function (target)
+  assert(os.exists("/usr/include/factorio/mod-info.hpp") or os.exists("/usr/local/include/factorio/mod-info.hpp"),
+  "Need Factorio-Mod-info\nVisit https://github.com/745275633/Factorio-Mod-info")
+end)
+
+
 target("create_modlist")
   set_kind("binary")
   add_files("src/create_modlist.cpp")
