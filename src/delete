@@ -1,6 +1,15 @@
 #!/bin/zsh
+
+cd $fac/mods/
 while read "name?Mod name: "
 do
-  sed -i "/^$name: /d" $conf/modlist.yml
+  if ! (grep -E "^$name: " $conf/modlist.yml ||
+    echo "$name" | mod_exist 2>/dev/null)
+  then
+    echo "Can't find this mod"
+  else
+    sed -i "/^$name: /d" $conf/modlist.yml
+    rm -rf $(ls -1 | grep -E "^${name}_")
+  fi
 done
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
