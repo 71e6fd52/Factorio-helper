@@ -5,6 +5,7 @@
 [[ "$install" ]] && output="$install"
 [[ "$installdir" ]] && output="$installdir"
 [[ "$OUTPUT" ]] && output="$OUTPUT"
+[[ "$DESTDIR" ]] && output="$DESTDIR"
 [[ "$prefix" ]] && output="$prefix"
 [[ "$PREFIX" ]] && output="$PREFIX"
 [[ "$output" ]] || output=/usr/local
