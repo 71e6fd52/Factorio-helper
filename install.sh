@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+[[ "$VERBOSE" ]] && set -x
+
 [[ "$install" ]] && output="$install"
 [[ "$installdir" ]] && output="$installdir"
 [[ "$OUTPUT" ]] && output="$OUTPUT"
@@ -9,7 +11,7 @@
 
 lib="$output/lib/factorio-helper"
 bin="$lib/bin"
-xmake install "--installdir=$lib" --root
+xmake install "--installdir=$lib" --root $VERBOSE
 install -d "$output/bin"
 install -d "$bin"
 install -d "$output/share/zsh/site-functions"
