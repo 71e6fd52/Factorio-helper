@@ -1,0 +1,19 @@
+#!/bin/zsh
+read name
+read url
+oldname=`ls $fac/mods/ -1 | grep -E "^${name}_"`
+echo "Download by file"
+name=`echo $url | cut -d/ -f 9`;
+if [[ "${oldname}x" != "x" ]]
+then
+  if [[ "$oldname" == "$name" ]]
+  then
+    echo "Already new"
+    exit
+  else
+    rm -rf $fac/mods/$oldname
+  fi
+fi
+echo "Downloading"
+curl -s --location --cookie "${cookie}" \
+  --continue-at - "$url" -o "$fac/mods/$name"

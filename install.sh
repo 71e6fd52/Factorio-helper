@@ -13,7 +13,20 @@ install -d "$output/share/zsh/site-functions"
 install -m755 _factorio-helper "$output/share/zsh/site-functions"
 install -m755 src/factorio-helper "$output/bin"
 
-files=(add change delete download init list passwd pull push update)
+files=(
+  add
+  change
+  delete
+  download
+  download.file
+  download.git
+  init
+  list
+  passwd
+  pull
+  push
+  update
+)
 for file in $files
 do
   install -m755 src/$file "$bin"
