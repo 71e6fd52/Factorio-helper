@@ -1,8 +1,12 @@
 #!/bin/zsh
-if [[ ${output}x == x ]]
-then
-  output=/usr/local
-fi
+
+[[ "$install" ]] && output="$install"
+[[ "$installdir" ]] && output="$installdir"
+[[ "$OUTPUT" ]] && output="$OUTPUT"
+[[ "$prefix" ]] && output="$prefix"
+[[ "$PREFIX" ]] && output="$PREFIX"
+[[ "$output" ]] || output=/usr/local
+
 lib="$output/lib/factorio-helper"
 bin="$lib/bin"
 xmake install "--installdir=$lib" --root
