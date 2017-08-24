@@ -6,4 +6,10 @@ export PATH="$(dirname $0)/../lib/$(basename $0)/bin:$PATH"
 mkdir $fac -p
 mkdir $conf -p
 mkdir $cache -p
-$@
+
+if which rlwrap >/dev/null 2>&1
+then
+  rlwrap $@
+else
+  $@
+fi
