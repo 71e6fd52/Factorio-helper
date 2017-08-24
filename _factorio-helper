@@ -2,8 +2,7 @@
 
 local -a options
 options=(
-'add: Add mod into modlist'
-'change: Enable/disable a mod '
+'change: Add/Enable/Disable mods'
 'delete: Delete mod in modlist'
 'list: Display mod list'
 'search: Search a mod'
