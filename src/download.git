@@ -24,7 +24,7 @@ then
   echo "Cannot find mod version, add into nongit"
   echo "$name" >>$conf/nongit
   rm -rf "$fac/mods/$oldname"
-  continue
+  exit
 fi
 name="${name}_${version}"
 if [[ "$oldname" != "$name" ]]
