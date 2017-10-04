@@ -6,7 +6,7 @@ echo "Download by file"
 name=`echo $url | cut -d/ -f 9`;
 if [[ "${oldname}x" != "x" ]]
 then
-  if [[ "$oldname" == "$name" ]]
+  if [[ "$oldname" == "$name" || "$oldname.zip" == "$name" ]]
   then
     echo "Already new"
     exit
