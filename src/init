@@ -18,6 +18,7 @@ then
   create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
 else
   read "url?Input git URL: "
+  mkdir -p $fac/mods
   git clone $url $conf
   pull
 fi
