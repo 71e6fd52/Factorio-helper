@@ -4,10 +4,9 @@
 
 [[ "$install" ]] && output="$install"
 [[ "$installdir" ]] && output="$installdir"
+[[ "$INSTALLDIR" ]] && output="$INSTALLDIR"
 [[ "$OUTPUT" ]] && output="$OUTPUT"
 [[ "$DESTDIR" ]] && output="$DESTDIR"
-[[ "$prefix" ]] && output="$prefix"
-[[ "$PREFIX" ]] && output="$PREFIX"
 [[ "$output" ]] || output=/usr/local
 
 lib="$output/lib/factorio-helper"
