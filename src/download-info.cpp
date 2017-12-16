@@ -6,7 +6,7 @@
 #include <unordered_set>
 #include <yaml-cpp/yaml.h>
 
-int main()
+int main([[maybe_unused]] int argc, [[maybe_unused]] const char *argv[])
 try
 {
   std::ifstream in3("/proc/self/fd/3");
@@ -16,7 +16,7 @@ try
     if(!i.second.as<bool>()) continue;
     factorio::mod::info mod;
     mod.read_name_fast(i.first.as<std::string>());
-    if ((nongit.erase(mod.name()) != 0u) || mod.github_path() == "") {
+    if ((nongit.erase(mod.name()) != 0u) || mod.github_path().empty()) {
       mod.read_url(mod.mod_page());
       std::cout << "file" << std::endl;
       std::cout << mod.name() << std::endl;
