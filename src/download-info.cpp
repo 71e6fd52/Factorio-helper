@@ -20,7 +20,7 @@ try
       mod.read_url(mod.mod_page());
       std::cout << "file" << std::endl;
       std::cout << mod.name() << std::endl;
-      std::cout << mod.download_url() << std::endl;
+      std::cout << mod.download_url(argv[1]) << std::endl;
     } else {
       std::cout << "git" << std::endl;
       std::cout << mod.name() << std::endl;

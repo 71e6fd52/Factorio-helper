@@ -2,5 +2,6 @@
 
 export cookie="$cache/cookie"
 passwd
-download-info <$conf/modlist.yml 3<$conf/nongit | download
+read "version?factorio version: "
+download-info $version <$conf/modlist.yml 3<$conf/nongit | download
 create_modlist <$conf/modlist.yml >$fac/mods/mod-list.json
